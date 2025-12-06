@@ -1,6 +1,12 @@
 #!/bin/sh
+# rauss - a lightweight superuser runner.
 if [ "$UID" -eq 0 ]; then
     echo "fatal ERR! rauss must not be run as root." >&2
+    exit 1
+fi
+
+if ! command -v su >/dev/null 2>&1; then
+    echo "fatal ERR! su command not found." >&2
     exit 1
 fi
 su -c "$*"
